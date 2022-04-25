@@ -3,3 +3,4 @@ export default function MovieIsNotFound() {
       <h1>Movie is not found</h1>
    )
 };
+
