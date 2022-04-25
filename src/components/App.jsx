@@ -1,17 +1,34 @@
-export const App = () => {
+import { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import NavBar from './NavBar/NavBar';
+import Loader from './Loader/Loader';
+
+const HomePage = lazy(() => {
+  import('../pages/HomePage' /* webpackChunkName: 'home-page' */)
+});
+const MovieDetailsPage = lazy(() => {
+  import('../pages/MovieDetailsPage' /* webpackChunkName: 'home-page' */)
+});
+const MoviesPage = lazy(() => {
+  import('../pages/MoviesPage' /* webpackChunkName: 'movies-page' */)
+})
+export default function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        textTransform: 'uppercase',
-        color: '#010101',
-      }}
-    >
-      React homework template
-    </div>
-  );
+    <>
+        <NavBar />
+    <Suspense fallback={<Loader/>}>
+        <Switch>
+          <Route path='/movies/:movieId'>
+            <MovieDetailsPage/>
+          </Route>
+          <Route path='/movies' exact>
+            <MoviesPage />
+          </Route>
+          <Route path='/'>
+            <HomePage/>
+          </Route>
+        </Switch>
+    </Suspense>
+    </>
+  )
 };

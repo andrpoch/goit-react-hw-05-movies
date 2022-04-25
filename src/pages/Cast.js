@@ -12,18 +12,18 @@ export default function Cast({movieId}) {
    return (
       cast && (
          <ul>
-            {cast.map((actor) => {
+            {cast.map((actor) => (
                <li key={actor.id}>
-                  <img
-                  src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}>
-                  </img>
-                  alt={actor.name}
-                  width='150'
-                  height='200'
+                    <img
+              src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+              alt={actor.name}
+              width="100"
+              height="150"
+            ></img>
                   <h3>{actor.name}</h3>
                   <p>Character: {actor.character}</p>
                </li>
-            })}
+      ))}
          </ul>
    )
    )
