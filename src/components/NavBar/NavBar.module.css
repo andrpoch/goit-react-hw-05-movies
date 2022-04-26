@@ -1,0 +1,21 @@
+.header{
+   margin-top: 30px;
+display: flex;
+margin-bottom: 20px;
+}
+.link{
+text-decoration: none;
+padding: 10px 10px 10px 0px ;
+font-size: 20px;
+margin-left: 20px;
+font-weight: 700;
+color: black;
+transition: color 250ms ease;
+}
+.link:focus,
+.link:hover{
+ color: white;
+}
+.activeLink{
+    color: whitesmoke;
+}

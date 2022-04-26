@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import Search from "components/SearchBar/Search";
+import Search from "components/Search/Search";
 import MovieList from "components/MovieList/MovieList";
 import { fetchSearch } from "services/themoviedbApi";
 
@@ -16,7 +16,7 @@ export default function MoviesPage() {
          return;
       }
       fetchSearch(searchQuery).then((data) => {
-         if (!data.results.lenght) {
+         if (!data.results.length) {
             alert('No results');
             return;
          }

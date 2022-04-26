@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 export default function Cast({movieId}) {
    const [cast, setCast] = useState(null);
    useEffect(() => {
-      fetchCredits().then((data) => {
+      fetchCredits(movieId).then((data) => {
          setCast(data.cast);
       })
    }, [movieId]);

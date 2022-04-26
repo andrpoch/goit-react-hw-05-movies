@@ -5,31 +5,33 @@ import s from './Search.module.css';
 export default function Search({onSubmit}) {
    const [searchQuery, setSearchQuery] = useState('');
    const handleSubmit = (e) => {
-      setSearchQuery(e.target.value.toLowerCase())
-   }
-   const handleChange = (e) => {
       e.preventDefault();
-      if (searchQuery.trim() === ' ') {
+      if (searchQuery.trim() === '') {
          alert('Write something');
          return;
       }
       onSubmit(searchQuery);
-   }
+   };
+   const handleChange = (e) => {
+      setSearchQuery(e.target.value.toLowerCase())
+   };
    return (
       <header>
-         <form onSubmit={handleSubmit}>
-            <input className={s.input}>
+         <form className={s.form} onSubmit={handleSubmit}>
+            <input
+               className={s.input}
                type='text'
-               autocomplete='off'
+               autoComplete='off'
                autoFocus
-               placeholder="Search movie"
+               placeholder='Search movie'
                value={searchQuery}
                onChange={handleChange}
-            </input>
-            <button className={s.btn} type='submit'>Search
+               />
+            <button className={s.button} type='submit'>
+               Search
             </button>
          </form>
-      </header>
+         </header>
    )
 };
 

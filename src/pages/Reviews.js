@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default function Reviews({movieId}) {
    const [reviews, setReviews] = useState([]);
    useEffect(() => {
-      fetchReviews().then((data) => {
+      fetchReviews(movieId).then((data) => {
          setReviews(data.results)
       })
    }, [movieId]);

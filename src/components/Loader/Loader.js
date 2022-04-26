@@ -5,7 +5,13 @@ import s from './Loader.module.css';
 export default function Loader() {
    return (
       <div className={s.wrapper}>
-         <Rings ariaLabel="loading-indicator" />
+         <Rings
+            height="100"
+            width="100"
+            color='white'
+            ariaLabel="loading-indicator" />
       </div>
    )
 };
+
+

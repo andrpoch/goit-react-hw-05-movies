@@ -5,11 +5,7 @@ async function fetchUrl(url = '', config = {}) {
    const r = await fetch(url, config);
    return r.ok ? await r.json() : Promise.reject(new Error('Nothing found'));
 };
-// export default function fetchTrending () {
-//    return fetchUrl(
-//       `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
-//    );
-// };
+
 export function fetchTrending () {
    return fetchUrl(
       `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
@@ -35,4 +31,5 @@ export function fetchReviews(movieId) {
       `${BASE_URL}movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`
    );
 };
+
 

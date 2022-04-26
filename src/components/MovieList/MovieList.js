@@ -5,15 +5,14 @@ import s from './MovieList.module.css';
 export default function MovieList({movies}) {
    const location = useLocation();
    return (
-      <ul
-         className={s.list}>
+      <ul>
          {movies.map((movie)=>(
-         <li className={s.item}>
+         <li className={s.item} key={movie.id}>
             <Link
-               className={s.movie}
+               className={s.link}
                to={{
-      pathname: `movie/${movie.id}`,
-      state: { from: location, },
+                  pathname: `movies/${movie.id}`,
+                  state: { from: {location,},},
                }}>
                {movie.title}
             </Link>

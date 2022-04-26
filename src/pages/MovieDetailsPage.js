@@ -1,15 +1,15 @@
-import { useState, useEffect, lazy, Suspense } from "react";
+import React,{ useState, useEffect, lazy, Suspense } from "react";
 import { Route, NavLink, useParams, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { fetchDetails } from "services/themoviedbApi";
 import Loader from "components/Loader/Loader";
 import s from './MovieDetailsPage.module.css';
 
-const Review = lazy(() => {
-   import('./Reviews' /* webpackChunkName: "review-page" */)
-});
-const Cast = lazy(() => {
-   import('./Cast' /* webpackChunkName: "cast-page" */)
-});
+const Review = lazy(() => 
+   import('./Reviews' /* webpackChunkName: 'reviews-page' */)
+);
+const Cast = lazy(() => 
+   import('./Cast' /* webpackChunkName: 'cast-page' */)
+);
 export default function MovieDetailsPage() {
    const history = useHistory();
    const location = useLocation();
@@ -27,7 +27,7 @@ export default function MovieDetailsPage() {
             top: document.documentElement.clientHeight,
             behavior: "smooth",
          });
-      }, 1200);
+      }, 500);
    };
    const goBack = () => {
       history.push(location?.state?.from?.location ?? '/')
@@ -37,11 +37,10 @@ export default function MovieDetailsPage() {
          {movie && (
             <>
                <div className={s.wrapper}>
-                  <button className={s.button} onCLick={goBack} type='button'>Go back</button>
+                  <button className={s.button} onClick={goBack} type='button'>Go back</button>
                   <div className={s.card}>
                      <img
-                        className={s.poster}
-                        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                        src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
                         alt={movie.title}
                      />
                      <div className={s.info}>
@@ -50,16 +49,31 @@ export default function MovieDetailsPage() {
                         <h3 className={s.title}>Overview</h3>
                         <p>{movie.overview}</p>
                         <h3 className={s.title}>Genres</h3>
-                        <p>{movie.genres.map((genre)=>genre.name).join(',')}</p>
+                        <p>{movie.genres.map((genre)=>genre.name).join(' , ')}</p>
                      </div>
                   </div>
                   <div className={s.more}>
                      <h3 className={s.title}>Additional information</h3>
-                     <ul>
+                     <ul >
                         <li>
                            <NavLink
                               className={s.link}
-                              onCLick={() => {
+                              onClick={() => {
+                                 onScrollPage();
+                              }}
+                              to={{
+                                 pathname: `${url}/cast`,
+                                 state: {
+                                    from:location?.state?.from ?? '/'
+                                 },
+                              }}
+                              
+                           >Cast</NavLink>
+                        </li>
+                        <li>
+                           <NavLink
+                              className={s.link}
+                              onClick={() => {
                                  onScrollPage();
                               }}
                               to={{
@@ -76,16 +90,13 @@ export default function MovieDetailsPage() {
                </div>
                <Suspense fallback={<Loader />}>
                   <Route path={`${path}/cast`}>
-                     <Cast movieId={movieId}/>
+                     <Cast movieId={movieId} />
                   </Route>
-                  </Suspense>
-               <Suspense fallback={<Loader />}>
                   <Route path={`${path}/reviews`}>
-                     <Review movieId={movieId}/>
+                     <Review movieId={movieId} />
                   </Route>
                   </Suspense>
             </>
-      
          )}
       </>
    )
