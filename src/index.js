@@ -5,7 +5,7 @@ import App from 'components/App';
 import './index.css';
 
 ReactDOM.render(
-  <BrowserRouter basename="/goit_react_hw_05_movies/">
+  <BrowserRouter>
     <App />
   </BrowserRouter>,
   document.querySelector("#root")
